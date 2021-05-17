@@ -30,7 +30,69 @@ Similar to any GitHub sources, you can choose among these options:
 
 ## Included Functions
 
-Click each function name below to view their repective documentation.
+Click each function name below to view their respective documentation.
 
 - [`Get-MxRecord`](docs/Get-MxRecord.md)
 - [`Write-MxRecordReport`](docs/Write-MxRecordReport.md)
+
+## Usage
+
+Below are some usage examples.
+
+### Example 1: Lookup MX Record And Create HTML Report File
+
+```PowerShell
+# Remove Module from session (start fresh)
+Remove-Module PSMXRecordReport -ErrorAction SilentlyContinue
+
+# Import Module
+Import-Module .\PSMXRecordReport.psd1
+
+# Domain list
+$domain = @('contoso.com','fabrikam.com','noemaildomain.xyz')
+
+# Get Mx Record
+$MxRecord = Get-MXRecord -Domain $domain
+
+# Write HTML report and out to file
+# Report output file
+# ReportType options: All (Default), Pass, Fail
+$MxRecord | Write-MxRecordReport -ReportType All | Out-File "c:\temp\MxRecordRport.html"
+```
+
+### Example 2: Lookup MX Record And Send HTML Report To Email
+
+```powershell
+# Remove Module from session (start fresh)
+Remove-Module PSMXRecordReport -ErrorAction SilentlyContinue
+
+# Import Module
+Import-Module .\PSMXRecordReport.psd1
+
+# Domain list
+$domain = @('contoso.com','fabrikam.com','noemaildomain.xyz')
+
+# Get Mx Record
+$MxRecord = Get-MXRecord -Domain $domain
+
+# Write HTML report and out to file
+# Report output file
+# ReportType options: All (Default), Pass, Fail
+$htmlReport = $MxRecord | Write-MxRecordReport -ReportType All
+
+# Build Email Parameters
+$smtpCredential = Get-Credential
+$emailSplat = @{
+    Subject = 'MX Record Validity Report'
+    SMTPServer = 'SMTP SERVER ADDRESS HERE'
+    Port = 'SMTP SERVER PORT HERE'
+    From = 'sender@domain.com'
+    To = @('recipient1@domain.com','recipient2@domain.com')
+    UseSSL = $true
+    BodyAsHtml = $true
+    Body = $htmlReport
+    Credential = $smtpCredential
+}
+Send-MailMessage @emailSplat
+```
+
