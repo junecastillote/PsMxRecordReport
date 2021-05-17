@@ -16,6 +16,9 @@ This PowerShell module can help you setup a regular MX record lookup interval. Y
 - [Usage Examples](#usage-examples)
   - [Example 1: Lookup MX Record And Create HTML Report File](#example-1-lookup-mx-record-and-create-html-report-file)
   - [Example 2: Lookup MX Record And Send HTML Report To Email](#example-2-lookup-mx-record-and-send-html-report-to-email)
+- [Report Example](#report-example)
+  - [HTML Report](#html-report)
+  - [CSV Report](#csv-report)
 
 
 ## Requirements
@@ -96,5 +99,15 @@ $emailSplat = @{
 }
 Send-MailMessage @emailSplat
 ```
+
+## Report Example
+
+### HTML Report
+
+![html report](docs/img/example1.png)
+
+### CSV Report
+
+![csv report](docs/img/example2.png)
 
 <div>Icons made by <a href="https://www.flaticon.com/authors/catkuro" title="catkuro">catkuro</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
