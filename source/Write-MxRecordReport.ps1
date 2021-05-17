@@ -80,7 +80,7 @@ Function Write-MxRecordReport {
         $HtmlBody += '<p><table id="SectionLabels">'
         $HtmlBody += '<tr><th>----END of REPORT----</th></tr></table></p>'
         $HtmlBody += '<p><font size="2" face="Tahoma"><b>[SETTINGS]</b><br />'
-        $HtmlBody += 'DNS Server: ' + ($InputObject[0].DNS) + '<br />'
+        $HtmlBody += 'DNS Server: ' + ($InputObject[0].NameServer) + '<br />'
         $HtmlBody += 'Report Host: ' + $env:COMPUTERNAME + '<br />'
         $HtmlBody += 'Report Type: ' + ($ReportType) + '<br />'
         $HtmlBody += '</p><p>'

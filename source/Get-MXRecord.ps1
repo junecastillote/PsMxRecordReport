@@ -53,8 +53,8 @@ Function Get-MxRecord {
                             Name         = $iDomain
                             NameExchange = $mxRecord.NameExchange
                             Preference   = $mxRecord.Preference
-                            IPAddress    = ((Resolve-DnsName @queryParams -ErrorAction SilentlyContinue).IPAddress | Where-Object { $_ -notmatch ":" }) -join ","
-                            DNS          = $DNSServer
+                            IPAddress    = ((Resolve-DnsName ($mxRecord.NameExchange) -ErrorAction SilentlyContinue).IPAddress | Where-Object { $_ -notmatch ":" }) -join ","
+                            NameServer          = $DNSServer
                             Status       = 'Pass'
                             Error        = ''
                         }
@@ -71,7 +71,7 @@ Function Get-MxRecord {
                     NameExchange = ''
                     Preference   = ''
                     IPAddress    = ''
-                    DNS          = $DNSServer
+                    NameServer          = $DNSServer
                     Status       = 'Fail'
                     Error        = $_.Exception.Message
                 }
