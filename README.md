@@ -1,10 +1,8 @@
 # PsMxRecordReport
 
 [![GitHub issues](https://img.shields.io/github/issues/junecastillote/PsMxRecordReport)](https://github.com/junecastillote/PsMxRecordReport/issues)
-
 [![GitHub forks](https://img.shields.io/github/forks/junecastillote/PsMxRecordReport)](https://github.com/junecastillote/PsMxRecordReport/network)
 
-[![GitHub license](https://img.shields.io/github/license/junecastillote/PsMxRecordReport)](https://github.com/junecastillote/PsMxRecordReport/blob/main/LICENSE)
 
 If you manage an email organization, one of the important configuration items you need to monitor is your organization's MX records. Missing or problematic MX records result in email deliverability problems.
 
