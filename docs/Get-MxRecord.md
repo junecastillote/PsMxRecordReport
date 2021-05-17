@@ -2,8 +2,6 @@
 
 Function to lookup the MX record of a domain or a collection of domains.
 
-[Back to ReadMe](../README.md)
-
 - [Syntax](#syntax)
 - [Parameters](#parameters)
 - [Inputs](#inputs)
@@ -200,3 +198,5 @@ NameServer   : Computer Default
 Status       : Pass
 Error        :
 ```
+
+[[Back to ReadMe]](../README.md)

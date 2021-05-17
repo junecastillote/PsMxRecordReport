@@ -2,13 +2,11 @@
 
 Function to convert the output of the [`Get-MxRecord`](Get-MxRecord.md) cmdlet into a pre-formatted HTML report.
 
-[Back to ReadMe](../README.md)
-
 - [Syntax](#syntax)
 - [Parameters](#parameters)
 - [Examples](#examples)
-	- [Example 1: Lookup MX Records And Create An HTML Report File](#example-1-lookup-mx-records-and-create-an-html-report-file)
-	- [Example 2: Send The Report Via Email](#example-2-send-the-report-via-email)
+  - [Example 1: Lookup MX Records And Create An HTML Report File](#example-1-lookup-mx-records-and-create-an-html-report-file)
+  - [Example 2: Send The Report Via Email](#example-2-send-the-report-via-email)
 
 ## Syntax
 
@@ -107,3 +105,5 @@ $emailSplat = @{
 }
 Send-MailMessage @emailSplat
 ```
+
+[[Back to ReadMe]](../README.md)
