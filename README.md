@@ -1,4 +1,4 @@
-# PsMxRecordReport PowerShell Module <!-- omit in toc -->
+# PsMxRecordReport
 
 [![GitHub issues](https://img.shields.io/github/issues/junecastillote/PsMxRecordReport)](https://github.com/junecastillote/PsMxRecordReport/issues)
 
@@ -6,18 +6,19 @@
 
 [![GitHub license](https://img.shields.io/github/license/junecastillote/PsMxRecordReport)](https://github.com/junecastillote/PsMxRecordReport/blob/main/LICENSE)
 
-- [Overview](#overview)
-- [Requirement](#requirement)
-- [Getting The Module](#getting-the-module)
-- [Included Functions](#included-functions)
-
-## Overview
-
 If you manage an email organization, one of the important configuration items you need to monitor is your organization's MX records. Missing or problematic MX records result in email deliverability problems.
 
 This PowerShell module can help you setup a regular MX record lookup interval. You can choose to save the results to file (CSV) and/or create a pre-formatted HTML report. Depending on your requirement, you can also use the HTML output as an email report.
 
-## Requirement
+- [Requirements](#requirements)
+- [Getting The Module](#getting-the-module)
+- [Included Functions](#included-functions)
+- [Usage Examples](#usage-examples)
+  - [Example 1: Lookup MX Record And Create HTML Report File](#example-1-lookup-mx-record-and-create-html-report-file)
+  - [Example 2: Lookup MX Record And Send HTML Report To Email](#example-2-lookup-mx-record-and-send-html-report-to-email)
+
+
+## Requirements
 
 There are no special requirements to run this module. You only need Windows PowerShell 5.1 or [PowerShell 7](https://github.com/PowerShell/powershell/releases/latest).
 
@@ -35,7 +36,7 @@ Click each function name below to view their respective documentation.
 - [`Get-MxRecord`](docs/Get-MxRecord.md)
 - [`Write-MxRecordReport`](docs/Write-MxRecordReport.md)
 
-## Usage
+## Usage Examples
 
 Below are some usage examples.
 
