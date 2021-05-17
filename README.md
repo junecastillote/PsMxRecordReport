@@ -110,4 +110,9 @@ Send-MailMessage @emailSplat
 
 ![csv report](docs/img/example2.png)
 
-<div>Icons made by <a href="https://www.flaticon.com/authors/catkuro" title="catkuro">catkuro</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+Attribution:
+
+<div>Icon made by <a href="https://www.flaticon.com/authors/catkuro" title="catkuro">catkuro</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+
+<div>Media image by <a href="https://www.pexels.com/@pixabay" title="Pixabay">Pixabay</a> from <a href="https://www.pexels.com/photo/white-jigsaw-puzzle-illustration-262488/" title="Pexels">Pexels.com</a></div>
