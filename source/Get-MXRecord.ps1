@@ -1,60 +1,84 @@
-[cmdletbinding()]
-param (
-    [parameter(Mandatory)]
-    [string[]]
-    $Domain,
+Function Get-MxRecord {
+    [cmdletbinding()]
+    param (
+        [parameter(Mandatory)]
+        [string[]]
+        $Domain,
 
-    [parameter()]
-    [string]
-    $NameServer
-)
+        [parameter()]
+        [string[]]
+        $ExcludeDomain,
 
-$errorFlag = $false
+        [parameter()]
+        [string[]]
+        $NameServer
+    )
 
-$finalResult = @()
-foreach ($iDomain in $Domain) {
-
-    ## Build DNS Query Parameters
-    $queryParams = @{
-        name = $iDomain
-        type = "MX"
+    if (!$NameServer) {
+        $DNSServer = 'Computer Default'
     }
-    if ($nameServer) { $queryParams += @{Server = $nameServer } }
+    else {
+        $DNSServer = ($NameServer -join ',')
+    }
 
-    ## Try to resolve each domain's MX record
-    try {
-        $mxRecords = Resolve-DnsName @queryParams -ErrorAction Stop | Where-Object { $_.QueryType -eq "MX" } | Sort-Object -Property Preference
-        if ($mxRecords) {
-            foreach ($mxRecord in $mxRecords) {
+    $finalResult = @()
 
-                $x = "" | Select-Object Name, NameExchange, Preference, IPAddress, Status, Error
-                $x.Name = $iDomain
-                $x.NameExchange = $mxRecord.NameExchange
-                $x.Preference = $mxRecord.Preference
-                $queryParams = @{
-                    name = $mxRecord.NameExchange
-                }
-                if ($nameServer) { $queryParams += @{Server = $nameServer } }
+    foreach ($iDomain in ($Domain | Sort-Object)) {
+        ## Check if domain is excluded
+        if ($ExcludeDomain -contains $iDomain) {
+            Write-Information "$(Get-Date -Format 'yyyy-MMM-dd hh:mm:ss tt') : $($iDomain) --> EXCLUDE"
+        }
 
-                $x.IPAddress = ((Resolve-DnsName @queryParams -ErrorAction SilentlyContinue).IPAddress | Where-Object { $_ -notmatch ":" }) -join ";"
-                $x.Status = "Passed"
-                #$x.Error = ""
-                $finalResult += $x
+        # If domain is not excluded
+        if ($ExcludeDomain -notcontains $iDomain ) {
+            ## Build DNS Query Parameters
+            $queryParams = @{
+                name        = $iDomain
+                type        = "MX"
+                NoHostsFile = $true
+                DnsOnly     = $true
             }
-            Write-Host (Get-Date -Format "dd-MMM-yyyy hh:mm:ss tt") ": $($iDomain): OK" -ForegroundColor Green
+            ## If NameServer parameter value is present
+            if ($nameServer) { $queryParams += @{Server = $nameServer } }
+
+            ## Try to resolve each domain's MX record
+            ## If DNS record resolution passed
+            try {
+                $mxRecords = Resolve-DnsName @queryParams -ErrorAction Stop | Where-Object { $_.QueryType -eq "MX" } | Sort-Object -Property Preference
+                if ($mxRecords) {
+                    foreach ($mxRecord in $mxRecords) {
+
+                        $temp = [pscustomobject][ordered]@{
+                            PSTypeName   = 'LazyExchangeAdmin.PSMXRecord'
+                            Name         = $iDomain
+                            NameExchange = $mxRecord.NameExchange
+                            Preference   = $mxRecord.Preference
+                            IPAddress    = ((Resolve-DnsName @queryParams -ErrorAction SilentlyContinue).IPAddress | Where-Object { $_ -notmatch ":" }) -join ","
+                            DNS          = $DNSServer
+                            Status       = 'Pass'
+                            Error        = ''
+                        }
+                        $finalResult += $temp
+                    }
+                    Write-Information "$(Get-Date -Format 'yyyy-MMM-dd hh:mm:ss tt') : $($iDomain) --> PASS"
+                }
+            }
+            ## If DNS record resolution failed
+            Catch {
+                $temp = [pscustomobject][ordered]@{
+                    PSTypeName   = 'LazyExchangeAdmin.PSMXRecord'
+                    Name         = $iDomain
+                    NameExchange = ''
+                    Preference   = ''
+                    IPAddress    = ''
+                    DNS          = $DNSServer
+                    Status       = 'Fail'
+                    Error        = $_.Exception.Message
+                }
+                $finalResult += $temp
+                Write-Information "$(Get-Date -Format 'yyyy-MMM-dd hh:mm:ss tt') : $($iDomain) --> FAIL"
+            }
         }
     }
-    Catch {
-        $errorFlag = $true
-        $x = "" | Select-Object Name, NameExchange, Preference, IPAddress, Status, Error
-        $x.Name = $iDomain
-        $x.NameExchange = "Error"
-        $x.Preference = "Error"
-        $x.IPAddress = "Error"
-        $x.Status = "Failed"
-        $x.Error = $_.Exception.Message
-        $finalResult += $x
-        Write-Host (Get-Date -Format "dd-MMM-yyyy hh:mm:ss tt") ": $($iDomain): NOT OK" -ForegroundColor Red
-    }
+    return $finalResult
 }
-return $finalResult

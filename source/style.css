@@ -1,0 +1,71 @@
+#HeadingInfo {
+	font-family: "Segoe UI";
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#HeadingInfo td, #HeadingInfo th {
+	font-size: 0.8em;
+	padding: 3px 7px 2px 7px;
+}
+
+#HeadingInfo th {
+	font-size: 2.0em;
+	font-weight: normal;
+	text-align: left;
+	padding-top: 5px;
+	padding-bottom: 4px;
+	background-color: #604767;
+	color: #fff;
+}
+
+#SectionLabels {
+	font-family: "Segoe UI";
+	width: fit-content;
+	border-collapse: collapse;
+}
+
+#SectionLabels th.data {
+	font-size: 1.5em;
+	text-align: left;
+	padding-top: 5px;
+	padding-bottom: 4px;
+	background-color: #fff;
+	color: #000;
+}
+
+#data {
+	font-size: 0.8em;
+	font-family: "Segoe UI";
+	width: fit-content;
+	border-collapse: collapse;
+}
+
+#data td, #data th {
+	border: 1px solid #DDD;
+	padding: 3px 7px 2px 7px;
+}
+
+#data th {
+	padding-top: 5px;
+	padding-bottom: 4px;
+	background-color: #00B388;
+	color: #fff;
+	text-align: left;
+}
+
+#data td {
+	padding-top: 5px;
+	padding-bottom: 4px;
+	text-align: left;
+}
+
+#data td.bad {
+	font-weight: bold;
+	color: #f04953;
+}
+
+#data td.good {
+	font-weight: bold;
+	color: #01a982;
+}
