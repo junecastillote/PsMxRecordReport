@@ -1,24 +1,31 @@
-
 # Remove Module from session
 Remove-Module PSMXRecordReport -ErrorAction SilentlyContinue
-
-# Import Installed Module
-# Import-Module PsMxReport
 
 # Import Local Module
 Import-Module .\PSMXRecordReport.psd1
 
-# Report output file
-$ReportFile = "c:\temp\MxRecordRport.html"
-# Report Type (All, PAss, Fail)
-$ReportType = "Fail"
-
 # Domain list
-$domain = @('gmail.com','lzex.ml','poshlab.ml','lazyexchangeadmin.cyou','nomailrecord.xyz')
+$domain = @('domain1','domain2','domain3','domain4','domain5')
 
-# Get MX Record and write HTML report
-Get-MXRecord -Domain $domain | Write-MxRecordReport -ReportType $ReportType | Out-File $ReportFile
+# Get Mx Record
+$MxRecord = Get-MXRecord -Domain $domain
 
-# Open the report
-Invoke-Item $ReportFile
+# Write HTML report and out to file
+# Report output file
+# ReportType options: All (Default), Pass, Fail
+$MxRecord | Write-MxRecordReport -ReportType All | Out-File "c:\temp\MxRecordRport.html"
 
+# Send via email
+# $smtpCredential = Get-Credential
+$emailSplat = @{
+    Subject = 'MX Record Lookup Report'
+    SMTPServer = 'smtp.office365.com'
+    Port = '587'
+    From = 'sender@domain.com'
+    To = 'recipient@domain.com'
+    UseSSL = $true
+    BodyAsHtml = $true
+    Body = ($MxRecord | Write-MxRecordReport -ReportType All)
+    Credential = $smtpCredential
+}
+Send-MailMessage @emailSplat
