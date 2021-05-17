@@ -10,7 +10,6 @@
 - [Requirement](#requirement)
 - [Getting The Module](#getting-the-module)
 - [Included Functions](#included-functions)
-  - [Get-MxRecord](#get-mxrecord)
 
 ## Overview
 
@@ -31,12 +30,7 @@ Similar to any GitHub sources, you can choose among these options:
 
 ## Included Functions
 
-### Get-MxRecord
+Click each function name below to view their repective documentation.
 
-```PowerShell
-Get-MxRecord
-    [-Domain] <string[]>
-    [[-ExcludeDomain] <string[]>]
-    [[-NameServer] <string[]>]
-    [<CommonParameters>]
-```
+- [`Get-MxRecord`](docs/Get-MxRecord.md)
+- [`Write-MxRecordReport`](docs/Write-MxRecordReport.md)

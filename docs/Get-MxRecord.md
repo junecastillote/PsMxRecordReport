@@ -1,6 +1,8 @@
-# Get-MxRecord
+# Get-MxRecord <!-- omit in toc -->
 
 Function to lookup the MX record of a domain or a collection of domains.
+
+[Back to ReadMe](../README.md)
 
 - [Syntax](#syntax)
 - [Parameters](#parameters)
