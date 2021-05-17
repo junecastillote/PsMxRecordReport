@@ -67,4 +67,4 @@ Get-MxRecord -Domain $Domain | Write-MxRecordReport | Out-File .\MxRecordReport-
 ```
 
 Result:
-![wmxr-01](img\wmxr-01.pngwmxr-01.png)
+![wmxr-01](img/wmxr-01.png)
