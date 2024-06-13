@@ -47,20 +47,33 @@ Function Get-MxRecord {
                 $mxRecords = Resolve-DnsName @queryParams -ErrorAction Stop | Where-Object { $_.QueryType -eq "MX" } | Sort-Object -Property Preference
                 if ($mxRecords) {
                     foreach ($mxRecord in $mxRecords) {
-
                         $temp = [pscustomobject][ordered]@{
                             PSTypeName   = 'LazyExchangeAdmin.PSMXRecord'
                             Name         = $iDomain
                             NameExchange = $mxRecord.NameExchange
                             Preference   = $mxRecord.Preference
                             IPAddress    = ((Resolve-DnsName ($mxRecord.NameExchange) -ErrorAction SilentlyContinue).IPAddress | Where-Object { $_ -notmatch ":" }) -join ","
-                            NameServer          = $DNSServer
+                            NameServer   = $DNSServer
                             Status       = 'Pass'
                             Error        = ''
                         }
                         $finalResult += $temp
                     }
                     Write-Information "$(Get-Date -Format 'yyyy-MMM-dd hh:mm:ss tt') : $($iDomain) --> PASS"
+                }
+                else {
+                    $temp = [pscustomobject][ordered]@{
+                        PSTypeName   = 'LazyExchangeAdmin.PSMXRecord'
+                        Name         = $iDomain
+                        NameExchange = ''
+                        Preference   = ''
+                        IPAddress    = ''
+                        NameServer   = $DNSServer
+                        Status       = 'Fail'
+                        Error        = "The domain exists but without an MX record"
+                    }
+                    $finalResult += $temp
+                    Write-Information "$(Get-Date -Format 'yyyy-MMM-dd hh:mm:ss tt') : $($iDomain) --> FAIL"
                 }
             }
             ## If DNS record resolution failed
@@ -71,7 +84,7 @@ Function Get-MxRecord {
                     NameExchange = ''
                     Preference   = ''
                     IPAddress    = ''
-                    NameServer          = $DNSServer
+                    NameServer   = $DNSServer
                     Status       = 'Fail'
                     Error        = $_.Exception.Message
                 }
