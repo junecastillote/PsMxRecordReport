@@ -59,11 +59,11 @@ Function Write-MxRecordReport {
             if ($passedResults) {
                 $TempHtmlBody += '<table id="SectionLabels"><tr><th class="data">Successful MX Record Lookup</th></tr></table>'
                 $TempHtmlBody += '<table id="data">'
-                $TempHtmlBody += "<tr><th>Domain</th><th>Mail Exchange | Preference</th></tr>"
+                $TempHtmlBody += "<tr><th>Domain</th><th>Mail Exchange | Preference | TTL</th></tr>"
                 foreach ($result in $passedResults) {
                     $mx = @()
                     foreach ($item in $result.Group) {
-                        $mx += "$($item.NameExchange) | $($item.Preference)"
+                        $mx += "$($item.NameExchange) | $($item.Preference) | $($item.TTL)"
                     }
                     $TempHtmlBody += "<tr><td>$($result.Name)</td><td>" + ($mx -join "<br />") + "</td></tr>"
                 }
