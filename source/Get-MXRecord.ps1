@@ -24,6 +24,7 @@ Function Get-MxRecord {
     $finalResult = @()
 
     foreach ($iDomain in ($Domain | Sort-Object)) {
+        $iDomain = $iDomain.Trim()
         ## Check if domain is excluded
         if ($ExcludeDomain -contains $iDomain) {
             Write-Information "$(Get-Date -Format 'yyyy-MMM-dd hh:mm:ss tt') : $($iDomain) --> EXCLUDE"
