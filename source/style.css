@@ -1,10 +1,11 @@
 #HeadingInfo {
-	font-family: "Calibri";
+	font-family: Aptos, Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
 	width: 100%;
 	border-collapse: collapse;
 }
 
-#HeadingInfo td, #HeadingInfo th {
+#HeadingInfo td,
+#HeadingInfo th {
 	font-size: 0.8em;
 	padding: 3px 7px 2px 7px;
 }
@@ -20,7 +21,7 @@
 }
 
 #SectionLabels {
-	font-family: "Calibri";
+	font-family: Aptos, Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
 	width: 100%;
 	border-collapse: collapse;
 }
@@ -36,12 +37,13 @@
 
 #data {
 	font-size: 0.8em;
-	font-family: "Calibri";
+	font-family: Aptos, Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
 	width: 100%;
 	border-collapse: collapse;
 }
 
-#data td, #data th {
+#data td,
+#data th {
 	border: 1px solid #DDD;
 	padding: 3px 7px 2px 7px;
 }
