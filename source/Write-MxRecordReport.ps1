@@ -48,7 +48,7 @@ Function Write-MxRecordReport {
                 $TempHtmlBody += '<table id="data">'
                 $TempHtmlBody += "<tr><th>Domain</th><th>Error</th></tr>"
                 foreach ($result in $failedResults) {
-                    $TempHtmlBody += "<tr><td>$($result.Name)</td><td class = ""bad"">$($result.error) <a href=https://intodns.com/$($result.Name) target=""_blank""> > Analyze</a></td></tr>"
+                    $TempHtmlBody += "<tr><td>$(($result.Name).ToUpper())</td><td class = ""bad"">$($result.error) <a href=https://intodns.com/$(($result.Name).ToUpper()) target=""_blank""> > Analyze</a></td></tr>"
                 }
                 $TempHtmlBody += '</table>'
             }
@@ -63,9 +63,9 @@ Function Write-MxRecordReport {
                 foreach ($result in $passedResults) {
                     $mx = @()
                     foreach ($item in $result.Group) {
-                        $mx += "$($item.NameExchange) | $($item.Preference) | $($item.TTL)"
+                        $mx += "$(($item.NameExchange).ToUpper()) | $($item.Preference) | $($item.TTL)"
                     }
-                    $TempHtmlBody += "<tr><td>$($result.Name)</td><td>" + ($mx -join "<br />") + "</td></tr>"
+                    $TempHtmlBody += "<tr><td>$(($result.Name).ToUpper())</td><td>" + ($mx -join "<br />") + "</td></tr>"
                 }
                 $TempHtmlBody += '</table>'
             }
