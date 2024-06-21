@@ -1,5 +1,5 @@
 #HeadingInfo {
-	font-family: "Segoe UI";
+	font-family: "Calibri";
 	width: 100%;
 	border-collapse: collapse;
 }
@@ -20,7 +20,7 @@
 }
 
 #SectionLabels {
-	font-family: "Segoe UI";
+	font-family: "Calibri";
 	width: 100%;
 	border-collapse: collapse;
 }
@@ -36,7 +36,7 @@
 
 #data {
 	font-size: 0.8em;
-	font-family: "Segoe UI";
+	font-family: "Calibri";
 	width: 100%;
 	border-collapse: collapse;
 }
