@@ -49,7 +49,8 @@ Function Write-MxRecordReport {
                 $TempHtmlBody += "<tr><th>Domain</th><th>Error</th></tr>"
                 foreach ($result in $failedResults) {
                     # $TempHtmlBody += "<tr><td>$(($result.Name).ToUpper())</td><td class = ""bad"">$($result.error) <a href=https://intodns.com/$(($result.Name).ToUpper()) target=""_blank""> > Analyze</a></td></tr>"
-                    $TempHtmlBody += "<tr><td>$(($result.Name).ToUpper())</td><td class = ""bad"">$($result.error) <a href=https://dnschecker.org/all-dns-records-of-domain.php?query=$(($result.Name).ToUpper())&rtype=ALL&dns=cloudflare target=""_blank""> > Analyze</a></td></tr>"
+                    # $TempHtmlBody += "<tr><td>$(($result.Name).ToUpper())</td><td class = ""bad"">$($result.error) <a href=https://dnschecker.org/all-dns-records-of-domain.php?query=$(($result.Name).ToUpper())&rtype=ALL&dns=cloudflare target=""_blank""> > Analyze</a></td></tr>"
+                    $TempHtmlBody += "<tr><td>$(($result.Name).ToUpper())</td><td class = ""bad"">$($result.error) <a href=https://dnschecker.org/all-dns-records-of-domain.php?query=$(($result.Name).ToUpper())&rtype=ALL&dns=cloudflare target=""_blank""> [DnsChecker]</a> <a href=https://mxtoolbox.com/SuperTool.aspx?action=mx%3a$(($result.Name).ToUpper())&run=toolpage target=""_blank""> [MXToolBox]</a></td></tr>"
                 }
                 $TempHtmlBody += '</table>'
             }
