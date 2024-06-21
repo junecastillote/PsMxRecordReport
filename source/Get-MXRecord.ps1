@@ -55,6 +55,7 @@ Function Get-MxRecord {
                             Preference   = $mxRecord.Preference
                             IPAddress    = ((Resolve-DnsName ($mxRecord.NameExchange) -ErrorAction SilentlyContinue).IPAddress | Where-Object { $_ -notmatch ":" }) -join ","
                             NameServer   = $DNSServer
+                            TTL          = $mxRecord.TTL
                             Status       = 'Pass'
                             Error        = ''
                         }
@@ -70,6 +71,7 @@ Function Get-MxRecord {
                         Preference   = ''
                         IPAddress    = ''
                         NameServer   = $DNSServer
+                        TTL          = ''
                         Status       = 'Fail'
                         Error        = "The domain exists but without an MX record"
                     }
@@ -86,6 +88,7 @@ Function Get-MxRecord {
                     Preference   = ''
                     IPAddress    = ''
                     NameServer   = $DNSServer
+                    TTL          = ''
                     Status       = 'Fail'
                     Error        = $_.Exception.Message
                 }
